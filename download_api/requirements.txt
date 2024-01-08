@@ -1,0 +1,17 @@
+azure-functions
+requests
+pandas
+pydocumentdb
+azure.cosmos
+azure.ai.formrecognizer
+azure.storage.blob
+azure-identity
+easydict
+faker
+paramiko
+openpyxl
+azure-search-documents==11.4.0b6
+httpx
+pysftp
+xlsxwriter
+boto3

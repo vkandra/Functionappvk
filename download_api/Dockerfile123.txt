@@ -1,0 +1,48 @@
+# Use the official Python runtime as a base image
+FROM python:3.8
+
+# Set the environment variable to bypass globalization support
+ENV System.Globalization.Invariant=true
+
+# Install required ICU packages
+RUN apt-get update && \
+    apt-get install -y icu-devtools
+
+# Set the environment variables to include required globalizations
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+# Reinstall the azure-functions package
+RUN pip uninstall azure-functions -y && \
+    pip install azure-functions
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Install the Azure Functions Core Tools
+RUN apt-get update \
+    && apt-get install -y apt-transport-https wget \
+    && wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add - \
+    && wget -q https://packages.microsoft.com/config/debian/10/prod.list \
+    && mv prod.list /etc/apt/sources.list.d/microsoft-prod.list \
+    && apt-get update \
+    && apt-get install -y azure-functions-core-tools-3
+
+# Add the Azure Functions Core Tools directory to the PATH
+ENV PATH="$PATH:/app/bin"
+
+# Copy the Azure Function code and requirements into the container
+# Copy the Azure Function code and requirements
+COPY __init__.py /app
+COPY requirements.txt /app
+
+# Install the required Python libraries from requirements.txt
+RUN pip install -r requirements.txt
+
+# Set the environment variables for Azure Storage and CosmosDB
+ENV AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=texextraction;AccountKey=5K34D7lHOov+QQKXSOC3e8g521QG63T5Qqbab+ql2ZBAjZU2RU0ePiEDREePRWPqm1Msw4n/VG7++AStBZMRSQ==;EndpointSuffix=core.windows.net"
+ENV COSMOSDB_ENDPOINT="https://cosmostextextract.documents.azure.com:443/"
+ENV COSMOSDB_KEY="RDzX0ACzpvaRKVpUQKE3kVr9ZYtoOiOMSS7sPqURb5mZ3F991BJ0RTMDmjIFWkdJ3cB7pr59vP9MACDbAMe9qA=="
+
+# Command to execute when the container starts
+CMD ["func", "start"]

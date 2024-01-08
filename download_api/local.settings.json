@@ -1,0 +1,19 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobs.Cosine_similarity.Disabled": "true",
+    "AzureWebJobs.chatbot_api.Disabled": "true",
+    "AzureWebJobs.pdfQA.Disabled": "true",
+    "AzureWebJobs.Cosmosdb_RequestResponse.Disabled": "true",
+    "AzureWebJobs.Formrecognizer_trigger.Disabled": "true",
+    "AzureWebJobs.SampleLogicAppTrigger.Disabled": "true",
+    "AzureWebJobs.fetchTemplateNamesAPI.Disabled": "false",
+    "AzureWebJobs.templatesaddingbkp.Disabled": "true",
+    "AzureWebJobs.templatesaddition.Disabled": "true"
+  },
+  "ConnectionStrings": {
+    "AzureCosmosDBConnectionString": "AccountEndpoint=https://cosmostextextract.documents.azure.com:443/;AccountKey=RDzX0ACzpvaRKVpUQKE3kVr9ZYtoOiOMSS7sPqURb5mZ3F991BJ0RTMDmjIFWkdJ3cB7pr59vP9MACDbAMe9qA==;"
+  }
+}
